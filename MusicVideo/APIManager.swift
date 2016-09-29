@@ -10,7 +10,7 @@ import Foundation
 
 class APIManager {
     
-    func loadData(_ urlString:String, completion: @escaping (_ result:String) -> Void) {
+    func loadData(_ urlString:String, completion: @escaping (_ videos:[Video]) -> Void) {
         
         //Configuration to disable the caching, this is preferd way, otherwise we can use the NSURLCache.setSharedURLCache
         // in AppDelegate
@@ -26,9 +26,7 @@ class APIManager {
             (data, response, error) -> Void in
             
             if error != nil{
-                DispatchQueue.main.async {
-                    completion((error!.localizedDescription))
-                }
+               print(error!.localizedDescription)
             } else{
                 //Added for JSONSerialization
                 //print(data)
@@ -39,20 +37,28 @@ class APIManager {
                      Converts the NSDATA into a JSON Object and cast it to a Dictionary
                      */
                     if let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments)
-                        as? JSONDictionary {
-                        print(json)
+                        as? JSONDictionary,
+                        let feed = json["feed"] as? JSONDictionary,
+                        let entries = feed["entry"] as? JSONArray{
+                   
+                        var videos = [Video]()
+                        for entry in entries {
+                            let entry = Video(data: entry as! JSONDictionary)
+                            videos.append(entry)
+                        }
+                        let i = videos.count
+                        print ("iTunesApiManager -- total count --> \(i)")
+                        print (" ")
                         
-                        //let priority = DispatchQueue.GlobalQueuePriority.high
-                       // DispatchQueue.global(priority: priority).async {
-                            DispatchQueue.main.async {
-                                completion("JSONSerialization Successful")
+                        DispatchQueue.main.async {
+                                completion(videos)
                             }
-                        //}
+                   
                     }
                     
                 } catch {
                     DispatchQueue.main.async {
-                        completion("error in NSJSONSerialization")
+                        print("error in NSJSONSerialization")
                     }
                 }
             }
