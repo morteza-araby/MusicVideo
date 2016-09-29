@@ -10,24 +10,24 @@ import Foundation
 
 class APIManager {
     
-    func loadData(urlString:String, completion: (result:String) -> Void) {
+    func loadData(_ urlString:String, completion: @escaping (_ result:String) -> Void) {
         
         //Configuration to disable the caching, this is preferd way, otherwise we can use the NSURLCache.setSharedURLCache
         // in AppDelegate
         
-        let config = NSURLSessionConfiguration.ephemeralSessionConfiguration()
-        let session = NSURLSession(configuration: config)
+        let config = URLSessionConfiguration.ephemeral
+        let session = URLSession(configuration: config)
         
         //let session = NSURLSession.sharedSession()
-        let url = NSURL(string: urlString)
+        let url = URL(string: urlString)
         
         
-        let task = session.dataTaskWithURL(url!){
+        let task = session.dataTask(with: url!, completionHandler: {
             (data, response, error) -> Void in
             
             if error != nil{
-                dispatch_async(dispatch_get_main_queue()) {
-                    completion(result: (error!.localizedDescription))
+                DispatchQueue.main.async {
+                    completion((error!.localizedDescription))
                 }
             } else{
                 //Added for JSONSerialization
@@ -38,25 +38,25 @@ class APIManager {
                      NSJSONSerialization requires the Do / Try / Catch
                      Converts the NSDATA into a JSON Object and cast it to a Dictionary
                      */
-                    if let json = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments)
+                    if let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments)
                         as? JSONDictionary {
                         print(json)
                         
-                        let priority = DISPATCH_QUEUE_PRIORITY_HIGH
-                        dispatch_async(dispatch_get_global_queue(priority, 0)) {
-                            dispatch_async(dispatch_get_main_queue()) {
-                                completion(result: "JSONSerialization Successful")
+                        //let priority = DispatchQueue.GlobalQueuePriority.high
+                       // DispatchQueue.global(priority: priority).async {
+                            DispatchQueue.main.async {
+                                completion("JSONSerialization Successful")
                             }
-                        }
+                        //}
                     }
                     
                 } catch {
-                    dispatch_async(dispatch_get_main_queue()) {
-                        completion(result: "error in NSJSONSerialization")
+                    DispatchQueue.main.async {
+                        completion("error in NSJSONSerialization")
                     }
                 }
             }
-        }
+        })
      
         //Start the task, task by default is suspended
         task.resume()
