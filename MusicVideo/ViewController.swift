@@ -7,28 +7,22 @@
 //
 
 import UIKit
-import ReachabilitySwift
+//import ReachabilitySwift
 
 class ViewController: UIViewController {
-    //declare this property where it won't go out of scope relative to your listener
-    let reachability = Reachability()!
-    
+   
     @IBOutlet weak var displayLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.reachabilityStatusChanged), name: NSNotification.Name(rawValue: "ReachStatusChanged"), object: nil)
         
-        //declare this inside of viewWillAppear
+        reachabilityStatusChanged()
+     
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChanged),name: ReachabilityChangedNotification,object: reachability)
-        do{
-            try reachability.startNotifier()
-        }catch{
-            print("could not start reachability notifier")
-        }
-         // let connect = connectedToNetwork()
+        // let connect = connectedToNetwork()
        // print("The device is :\(connect)")
         
         
@@ -58,22 +52,24 @@ class ViewController: UIViewController {
     }
     
     
-    func reachabilityChanged(note: NSNotification) {
-        
-        let reachability = note.object as! Reachability
-        
-        if reachability.isReachable {
-            if reachability.isReachableViaWiFi {
-                view.backgroundColor = UIColor.green
-                displayLabel.text = "Reachable with WIFI"
-            } else {
-                view.backgroundColor = UIColor.yellow
-                displayLabel.text = "Reachable with Cellular"
-            }
-        } else {
-            view.backgroundColor = UIColor.red
-            displayLabel.text = "No Internet"
+    func reachabilityStatusChanged() {
+        switch reachabilityStatus {
+        case NOACCESS:
+            view.backgroundColor = UIColor.orange
+            displayLabel.text = NOACCESS
+        case WIFI:
+            view.backgroundColor = UIColor.green
+            displayLabel.text = WIFI
+        case WWAN:
+            view.backgroundColor = UIColor.yellow
+            displayLabel.text = WWAN
+        default:
+            return
         }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "ReachStatusChanged"), object: nil)
     }
     
     /*
@@ -104,14 +100,5 @@ class ViewController: UIViewController {
   */
     // is called just as the object is about to be deallocated
     // removes the observer
-    
-    deinit {
-        
-        reachability.stopNotifier()
-        NotificationCenter.default.removeObserver(self,
-                                                            name: ReachabilityChangedNotification,
-                                                            object: reachability)
-      
-    }
-}
+ }
 

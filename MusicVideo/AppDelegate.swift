@@ -9,22 +9,46 @@
 import UIKit
 import CoreData
 
-var reachabilityStatus = NOACCESS
+var reachability        : Reachability?
+var reachabilityStatus  = ""
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+     var internetCheck: Reachability?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         //Disable the caching.
 //       (NSURLCache(memoryCapacity: 0, diskCapacity: 0, diskPath: nil))
         
-     
+        NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.reachabilityChanged(_:)), name: NSNotification.Name.reachabilityChanged, object: nil)
+        internetCheck = Reachability.forInternetConnection()
+        internetCheck?.startNotifier()  // observe
+        statusChangedWithReachability(internetCheck!) // prime the pump
+        
         return true
     }
 
- 
+    func reachabilityChanged(_ notification: Notification) {
+        reachability = notification.object as? Reachability
+        statusChangedWithReachability(reachability!)
+    }
     
+    func statusChangedWithReachability(_ currentReachabilityStatus: Reachability) {
+        let networkStatus : NetworkStatus = currentReachabilityStatus.currentReachabilityStatus()
+        
+        switch networkStatus.rawValue {
+        case NotReachable.rawValue:     reachabilityStatus = NOACCESS
+        case ReachableViaWiFi.rawValue: reachabilityStatus = WIFI
+        case ReachableViaWWAN.rawValue: reachabilityStatus = WWAN
+        default: return
+        }
+        
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "ReachStatusChanged"), object: nil)
+        // Notify VC
+    }
     
     
     func applicationWillResignActive(_ application: UIApplication) {
@@ -47,7 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
        
-        
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.reachabilityChanged, object: nil)
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
     }
