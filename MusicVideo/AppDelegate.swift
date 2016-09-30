@@ -9,52 +9,21 @@
 import UIKit
 import CoreData
 
-var reachability : Reachability?
-var reachabilityStatus = WIFI
+var reachabilityStatus = NOACCESS
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
-    var internetCheck : Reachability?
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         //Disable the caching.
 //       (NSURLCache(memoryCapacity: 0, diskCapacity: 0, diskPath: nil))
         
-        NotificationCenter.default.addObserver(self, selector: Selector(("reachabilityChanged:")), name: NSNotification.Name.reachabilityChanged, object: nil)
-        
-        internetCheck = Reachability.forInternetConnection()
-        internetCheck?.startNotifier()
-        
+     
         return true
     }
 
-    func reachabilityChanged(notification: NSNotification) {
-        reachability = notification.object as? Reachability
-        statusChangedWithReachability(currentReachabilityStatus: reachability!)
-    }
-    
-    func statusChangedWithReachability(currentReachabilityStatus: Reachability) {
-        let networkStatus: NetworkStatus = reachability!.currentReachabilityStatus()
-        
-        switch networkStatus.rawValue{
-        case NotReachable.rawValue:
-            reachabilityStatus = NOACCESS
-        case ReachableViaWiFi.rawValue:
-            reachabilityStatus = WIFI
-        case ReachableViaWWAN.rawValue:
-            reachabilityStatus = WWAN
-        default:
-            return
-        }
-        
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ReachStatusChanged"), object: nil)
-    }
-    
-    
+ 
     
     
     
@@ -78,8 +47,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
        
-        
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.reachabilityChanged, object: nil)
         
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
