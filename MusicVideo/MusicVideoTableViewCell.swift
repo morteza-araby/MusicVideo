@@ -24,7 +24,40 @@ class MusicVideoTableViewCell: UITableViewCell {
     func updateCell() -> Void {
         musicTitle.text = video?.title
         rank.text = ("\(video!.vRank)")
-        musicImag.image = UIImage(named: "imageNotAvailable")
+        
+        //musicImag.image = UIImage(named: "imageNotAvailable")
+        if video!.vImageData != nil {
+            print("Get data from array ...")
+            musicImag.image = UIImage(data: video!.vImageData! as Data)
+        }else{
+            GetVideoImage(video: video!, imageView: musicImag)
+        }
+        
+        
     }
 
+    func GetVideoImage(video: Video, imageView: UIImageView) -> Void {
+        // Background thread
+        //DISPATCH_QUEUE_PRIORITY_HIGH Items dispatched to the queue will run at high
+        // priority, i.e. the queue will be scheduled for execution before any default
+        // priority or low priority queue.
+        
+        // Move to a background thread to do some long running work
+            DispatchQueue.global(qos: .userInitiated).async {
+            let data = NSData(contentsOf: NSURL(string: video.imageURL)! as URL)
+            
+            var image : UIImage?
+            if data != nil {
+                video.vImageData = data
+                image = UIImage(data: data! as Data)
+            }
+            
+            // Bounce back to the main thread to update the UI
+            DispatchQueue.main.async {
+                imageView.image = image
+            }
+        }
+    }
 }
+
+

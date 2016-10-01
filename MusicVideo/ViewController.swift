@@ -11,7 +11,6 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
    
-    @IBOutlet weak var displayLabel: UILabel!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -81,9 +80,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             self.present(alert, animated: true, completion: nil)
             }
         default:
-            view.backgroundColor = UIColor.green
-            
-            displayLabel.text = WIFI
+            //view.backgroundColor = UIColor.green
             fetchData()
         }
         
