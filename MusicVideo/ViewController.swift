@@ -55,7 +55,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func reachabilityStatusChanged() {
         switch reachabilityStatus {
         case NOACCESS:
-            view.backgroundColor = UIColor.orange
+            //view.backgroundColor = UIColor.orange
             
             DispatchQueue.main.async {
             let alert = UIAlertController(title: "No Internet Access", message: "Please make sure you are connected to the Internet", preferredStyle: .alert)
@@ -82,6 +82,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
         default:
             view.backgroundColor = UIColor.green
+            
+            displayLabel.text = WIFI
             fetchData()
         }
         
@@ -94,7 +96,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         //Call API
         let api = APIManager()
-        api.loadData("https://itunes.apple.com/us/rss/topmusicvideos/limit=50/json",
+        api.loadData("https://itunes.apple.com/us/rss/topmusicvideos/limit=200/json",
                      completion: didLoadData)
         //        api.loadData("https://itunes.apple.com/us/rss/topmusicvideos/limit=10/json") {
         //            (result: String) in
@@ -109,6 +111,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "ReachStatusChanged"), object: nil)
     }
     
+    
+    private struct storyboard {
+        static let cellReuseIdentifier = "cell"
+    }
+    
+    
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return videos.count
     }
@@ -119,13 +127,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: storyboard.cellReuseIdentifier) as! MusicVideoTableViewCell
         
-        let video = videos[indexPath.row]
-        cell?.textLabel?.text = ("\(indexPath.row + 1)")
-        cell?.detailTextLabel?.text = video.title
+        cell.video = videos[indexPath.row]
         
-        return cell!
+        return cell
         
     }
     

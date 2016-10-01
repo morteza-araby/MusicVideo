@@ -42,8 +42,9 @@ class APIManager {
                         let entries = feed["entry"] as? JSONArray{
                    
                         var videos = [Video]()
-                        for entry in entries {
+                        for (index,entry) in entries.enumerated() {
                             let entry = Video(data: entry as! JSONDictionary)
+                            entry.vRank = index + 1
                             videos.append(entry)
                         }
                         let i = videos.count

@@ -9,6 +9,8 @@
 import Foundation
 
 class Video {
+    var vRank = 0
+    
     // Data Encapsulation
     let NO_STRING_FOUND = "-none-"
     
