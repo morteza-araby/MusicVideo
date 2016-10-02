@@ -24,6 +24,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.reachabilityStatusChanged), name: NSNotification.Name(rawValue: "ReachStatusChanged"), object: nil)
         
+        //dynamicall load the font in app if the system font changes.
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.preferredFontChanged), name: NSNotification.Name(rawValue: "UIContentSizeCategoryDidChangeNotification"), object: nil)
+
+        
         reachabilityStatusChanged()
      
         
@@ -103,6 +107,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     }
     
+    func preferredFontChanged(){
+        print("The preferred Font Changed")
+    }
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "ReachStatusChanged"), object: nil)

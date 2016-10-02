@@ -31,15 +31,20 @@
                                             <frame key="frameInset" width="414" height="131"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="M3C-KC-Trs"/>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="rank" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LIO-zd-VQI">
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="M3C-KC-Trs">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="145" id="bQa-Ih-nuU"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="musicTitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gS7-Z6-CD7">
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="musicTitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gS7-Z6-CD7">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="rank" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LIO-zd-VQI">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="223" id="Yu6-Go-FXl"/>
+                                                        <constraint firstAttribute="height" constant="41" id="cXa-Vr-iem"/>
+                                                        <constraint firstAttribute="width" constant="99" id="jcQ-TJ-kvT"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -48,16 +53,15 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstItem="gS7-Z6-CD7" firstAttribute="top" secondItem="n0j-qV-iY2" secondAttribute="topMargin" constant="26" id="18h-iD-Lg4"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="gS7-Z6-CD7" secondAttribute="bottom" constant="42" id="ANq-yW-7am"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="gS7-Z6-CD7" secondAttribute="trailing" constant="5" id="KTa-zc-XhM"/>
-                                                <constraint firstItem="M3C-KC-Trs" firstAttribute="top" secondItem="n0j-qV-iY2" secondAttribute="topMargin" id="Nfk-Zc-B4e"/>
-                                                <constraint firstItem="LIO-zd-VQI" firstAttribute="leading" secondItem="M3C-KC-Trs" secondAttribute="trailing" constant="25" id="RgV-Vk-h9j"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="LIO-zd-VQI" secondAttribute="bottom" constant="85" id="X4h-TD-Jsl"/>
-                                                <constraint firstItem="M3C-KC-Trs" firstAttribute="leading" secondItem="n0j-qV-iY2" secondAttribute="leadingMargin" id="bG8-i0-wEm"/>
-                                                <constraint firstItem="gS7-Z6-CD7" firstAttribute="leading" secondItem="M3C-KC-Trs" secondAttribute="trailing" constant="25" id="m0Y-i8-fT5"/>
-                                                <constraint firstItem="LIO-zd-VQI" firstAttribute="top" secondItem="n0j-qV-iY2" secondAttribute="top" id="rCb-JP-2Ad"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="M3C-KC-Trs" secondAttribute="bottom" constant="31" id="un3-rp-Jk8"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="gS7-Z6-CD7" secondAttribute="bottom" constant="27" id="7Ue-gV-R5D"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="M3C-KC-Trs" secondAttribute="bottom" constant="12" id="fef-kK-ZEA"/>
+                                                <constraint firstItem="M3C-KC-Trs" firstAttribute="leading" secondItem="n0j-qV-iY2" secondAttribute="leadingMargin" id="hcW-Hk-El9"/>
+                                                <constraint firstItem="LIO-zd-VQI" firstAttribute="leading" secondItem="gS7-Z6-CD7" secondAttribute="leading" id="i3u-1W-QoG"/>
+                                                <constraint firstItem="gS7-Z6-CD7" firstAttribute="top" secondItem="LIO-zd-VQI" secondAttribute="bottom" id="jxb-Wv-8rZ"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="gS7-Z6-CD7" secondAttribute="trailing" constant="22" id="kyE-Yd-Cky"/>
+                                                <constraint firstItem="M3C-KC-Trs" firstAttribute="top" secondItem="LIO-zd-VQI" secondAttribute="top" id="mL4-dm-RAt"/>
+                                                <constraint firstItem="M3C-KC-Trs" firstAttribute="top" secondItem="n0j-qV-iY2" secondAttribute="topMargin" id="qn7-gI-ZFx"/>
+                                                <constraint firstItem="LIO-zd-VQI" firstAttribute="leading" secondItem="M3C-KC-Trs" secondAttribute="trailing" constant="8" symbolic="YES" id="vuc-HL-qmm"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

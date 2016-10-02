@@ -22,6 +22,11 @@ class MusicVideoTableViewCell: UITableViewCell {
     @IBOutlet weak var musicTitle: UILabel!
 
     func updateCell() -> Void {
+        //using preferred fonts instead of system font
+        musicTitle.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
+        rank.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.subheadline)
+        
+        
         musicTitle.text = video?.title
         rank.text = ("\(video!.vRank)")
         
