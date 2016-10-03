@@ -113,6 +113,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "ReachStatusChanged"), object: nil)
+        
+        //Remove font observer
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "UIContentSizeCategoryDidChangeNotification"), object: nil)
+        
     }
     
     
