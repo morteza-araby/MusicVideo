@@ -122,6 +122,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     private struct storyboard {
         static let cellReuseIdentifier = "cell"
+        static let segueIdentifier = "musicDetail"
     }
     
     
@@ -145,12 +146,28 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     
-    
-    
-    
-    
-    
-    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        
+        if segue.identifier == storyboard.segueIdentifier{
+            
+            let viewController: MusicVideoDetailVC = segue.destination as! MusicVideoDetailVC
+            let indexPath = self.tableView.indexPathForSelectedRow
+            let video = videos[(indexPath! as NSIndexPath).row]
+            
+            viewController.video = video
+            
+            
+            /*
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let video = videos[indexPath.row]
+                let dvc = segue.destination as! MusicVideoDetailVC
+                dvc.video = video
+            }*/
+        }
+    }
     
     
     
