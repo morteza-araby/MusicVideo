@@ -9,13 +9,15 @@
 import UIKit
 //import ReachabilitySwift
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UITableViewController {
    
     
-    @IBOutlet weak var tableView: UITableView!
+   // @IBOutlet weak var tableView: UITableView!
     
     var videos: [Video] = []
-    
+    var limit = 10
+    var oldLimit = 0
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,6 +51,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         for (index, item) in videos.enumerated() {
             print( "\(index) name \(item.artist)")
         }
+        
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.red]
+        title = ("The iTunes Top \(limit) Music Videos")
+        
+        oldLimit = limit
         
         tableView.reloadData()
         
@@ -90,14 +97,33 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
-    func fetchData() -> Void {
+   
+    @IBAction func refresh(_ sender: UIRefreshControl) {
+        refreshControl?.endRefreshing()
+        fetchData()
         
-        if videos.count > 0 { // if we already have fetched data no need to do it again
-            return
+    }
+    func getAPICount(){
+        if(UserDefaults.standard.object(forKey: "APICNT") != nil){
+            let theValue = UserDefaults.standard.object(forKey: "APICNT") as! Int
+            limit = theValue
         }
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "E, dd MMM yyyy HH:mm:ss"
+        let refreshDate = formatter.string(from: NSDate() as Date)
+        refreshControl?.attributedTitle = NSAttributedString(string: "\(refreshDate)")
+    }
+    
+    func fetchData() -> Void {
+        /*
+        if videos.count > 0  && limit != oldLimit { // if we already have fetched data no need to do it again
+            return
+        }*/
+        getAPICount()
         //Call API
         let api = APIManager()
-        api.loadData("https://itunes.apple.com/us/rss/topmusicvideos/limit=200/json",
+        api.loadData("https://itunes.apple.com/us/rss/topmusicvideos/limit=\(limit)/json",
                      completion: didLoadData)
         //        api.loadData("https://itunes.apple.com/us/rss/topmusicvideos/limit=10/json") {
         //            (result: String) in
@@ -126,16 +152,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+    public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return videos.count
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }// Default is 1 if not implemented
     
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: storyboard.cellReuseIdentifier) as! MusicVideoTableViewCell
         
         cell.video = videos[indexPath.row]
