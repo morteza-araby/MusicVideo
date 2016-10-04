@@ -12,6 +12,7 @@ class MusicVideoDetailVC: UIViewController {
     
     var video: Video!
 
+   // var sec: Bool = false
     @IBOutlet weak var vTitle: UILabel!
     @IBOutlet weak var videoImage: UIImageView!
     @IBOutlet weak var vGenre: UILabel!
@@ -20,6 +21,8 @@ class MusicVideoDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+         //sec = UserDefaults.standard.bool(forKey: "secSetting")
+        
         title = video.artist
         vTitle.text = video.title
         vPrice.text = video.price

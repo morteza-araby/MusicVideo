@@ -12,7 +12,7 @@ class SettingsTVC: UITableViewController {
 
    
     @IBOutlet weak var aboutDisplay: UILabel!
-        
+    
     @IBOutlet weak var feedBackDisplay: UILabel!
     
     @IBOutlet weak var securityDisplay: UILabel!
@@ -32,6 +32,20 @@ class SettingsTVC: UITableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.preferredFontChanged), name: NSNotification.Name(rawValue: "UIContentSizeCategoryDidChangeNotification"), object: nil)
         
         tableView.alwaysBounceVertical = false // don't allow scrolling vertically
+        
+        title = "Settings"
+        
+        touchID!.isOn = UserDefaults.standard.bool(forKey: "SecSetting")
+      
+    }
+    
+    @IBAction func touchIdSec(_ sender: UISwitch) {
+        let defaults = UserDefaults.standard
+        if touchID.isOn {
+            defaults.set(touchID!.isOn, forKey: "SecSetting")
+        }else{
+            defaults.set(false, forKey: "SecSetting")
+        }
     }
     
     func preferredFontChanged(){
@@ -46,7 +60,6 @@ class SettingsTVC: UITableViewController {
         
         //Remove font observer
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "UIContentSizeCategoryDidChangeNotification"), object: nil)
-        
     }
     
 
