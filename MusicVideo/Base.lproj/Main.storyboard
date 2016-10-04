@@ -202,10 +202,10 @@
             </objects>
             <point key="canvasLocation" x="5506.79347826087" y="91.304347826086968"/>
         </scene>
-        <!--Table View Controller-->
+        <!--SettingsTVC-->
         <scene sceneID="fRg-9w-yrP">
             <objects>
-                <tableViewController id="rZ2-Bq-KwC" sceneMemberID="viewController">
+                <tableViewController id="rZ2-Bq-KwC" customClass="SettingsTVC" customModule="MusicVideo" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="2rh-fq-zux">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -222,7 +222,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4xf-nd-kQV">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="121" id="wYi-mH-WY8"/>
+                                                        <constraint firstAttribute="width" constant="112" id="mJs-Yl-tbo"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <nil key="textColor"/>
@@ -230,9 +230,9 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="4xf-nd-kQV" firstAttribute="bottom" secondItem="KSe-U9-U7R" secondAttribute="bottomMargin" id="abk-d8-la7"/>
-                                                <constraint firstItem="4xf-nd-kQV" firstAttribute="leading" secondItem="KSe-U9-U7R" secondAttribute="leadingMargin" constant="12" id="fzR-vq-x1V"/>
-                                                <constraint firstItem="4xf-nd-kQV" firstAttribute="top" secondItem="KSe-U9-U7R" secondAttribute="topMargin" constant="6" id="wFI-sk-9bB"/>
+                                                <constraint firstAttribute="bottom" secondItem="4xf-nd-kQV" secondAttribute="bottom" id="9XH-Jw-ila"/>
+                                                <constraint firstItem="4xf-nd-kQV" firstAttribute="top" secondItem="KSe-U9-U7R" secondAttribute="topMargin" id="PwG-Iy-SlB"/>
+                                                <constraint firstItem="4xf-nd-kQV" firstAttribute="leading" secondItem="KSe-U9-U7R" secondAttribute="leadingMargin" constant="12" id="utM-NL-ZnH"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -356,10 +356,19 @@
                             <outlet property="delegate" destination="rZ2-Bq-KwC" id="4lo-rS-xh2"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="APICnt" destination="Zau-Qd-8Pi" id="kyw-dc-4Jl"/>
+                        <outlet property="aboutDisplay" destination="4xf-nd-kQV" id="cV2-M5-KoZ"/>
+                        <outlet property="bestImageDisplay" destination="Muk-hq-Peb" id="kRa-uH-hA3"/>
+                        <outlet property="feedBackDisplay" destination="awV-X4-tuX" id="1nU-Wl-QqA"/>
+                        <outlet property="securityDisplay" destination="kd1-vQ-Q06" id="Wih-wv-ZBa"/>
+                        <outlet property="sliderCnt" destination="1Sf-Ox-RhZ" id="ZZR-Ku-3s8"/>
+                        <outlet property="touchID" destination="IqQ-Z1-ITA" id="WBW-CE-Pvn"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cdh-cg-gr7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4525" y="796"/>
+            <point key="canvasLocation" x="4524.6376811594209" y="795.6521739130435"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Td4-P7-cVy">
