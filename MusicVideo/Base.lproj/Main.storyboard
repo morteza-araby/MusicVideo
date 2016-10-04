@@ -178,6 +178,9 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="C8v-G9-lJS"/>
                         <barButtonItem systemItem="action" id="Jes-e8-bSU">
                             <color key="tintColor" red="0.99940508604049683" green="0.003072116756811738" blue="0.35302108526229858" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="socialMedia:" destination="drT-Hg-usn" id="VaK-5D-gr9"/>
+                            </connections>
                         </barButtonItem>
                     </toolbarItems>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
