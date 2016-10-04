@@ -36,7 +36,22 @@ class SettingsTVC: UITableViewController {
         title = "Settings"
         
         touchID!.isOn = UserDefaults.standard.bool(forKey: "SecSetting")
+        
+        //Get slider value to the text
+        if(UserDefaults.standard.object(forKey: "APICNT") != nil){
+            let theValue = UserDefaults.standard.object(forKey: "APICNT") as! Int
+            APICnt.text = ("\(theValue)")
+            sliderCnt.value = Float(theValue)
+            
+        }
       
+    }
+    
+    @IBAction func valueChanged(_ sender: AnyObject) {
+        let defaults = UserDefaults.standard
+        defaults.set(Int(sliderCnt.value), forKey: "APICNT")
+        APICnt.text = ("\(Int(sliderCnt.value))")
+        
     }
     
     @IBAction func touchIdSec(_ sender: UISwitch) {

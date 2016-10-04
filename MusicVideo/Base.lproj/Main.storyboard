@@ -274,7 +274,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IqQ-Z1-ITA">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="IqQ-Z1-ITA">
                                                     <connections>
                                                         <action selector="touchIdSec:" destination="rZ2-Bq-KwC" eventType="valueChanged" id="71r-5X-xX4"/>
                                                     </connections>
@@ -304,7 +304,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dpJ-5O-eha"/>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="dpJ-5O-eha"/>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Muk-hq-Peb" firstAttribute="centerY" secondItem="oY6-aW-GXy" secondAttribute="centerY" id="0vL-G6-pQf"/>
@@ -322,7 +322,7 @@
                                             <frame key="frameInset" width="414" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zau-Qd-8Pi">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zau-Qd-8Pi">
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -343,7 +343,11 @@
                                             <frame key="frameInset" width="414" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="1Sf-Ox-RhZ"/>
+                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="10" maxValue="200" translatesAutoresizingMaskIntoConstraints="NO" id="1Sf-Ox-RhZ">
+                                                    <connections>
+                                                        <action selector="valueChanged:" destination="rZ2-Bq-KwC" eventType="valueChanged" id="s4J-cZ-kzd"/>
+                                                    </connections>
+                                                </slider>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="1Sf-Ox-RhZ" firstAttribute="bottom" secondItem="2CE-8h-9eA" secondAttribute="bottomMargin" id="ASs-zo-xnQ"/>
